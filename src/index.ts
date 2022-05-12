@@ -14,20 +14,20 @@ const roomFinder = async () => {
   const $ = cheerio.load(html);
   const firstRoomCard = $("div.plp-items > a");
 
-  if (firstRoomCard) {
-    const allRoomsCount = $("div.plp-items").children().nextAll('.product-card').length + 1 
+  if (!firstRoomCard) {
     // tslint:disable-next-line: no-console
-    console.log({
-      availableRoomsCount: allRoomsCount,
-      firstRoomUrl: `https://www.jabama.com${firstRoomCard.attr("href")}`,
-      allRoomsLink: jabamaDomain,
-    });
-  }else{
-      // tslint:disable-next-line: no-console
-      console.log("not found");
+    console.log("not found");
   }
+
+  const allRoomsCount = $("div.plp-items").children().nextAll('.product-card').length + 1
+  // tslint:disable-next-line: no-console
+  console.log({
+    availableRoomsCount: allRoomsCount,
+    firstRoomUrl: `https://www.jabama.com${firstRoomCard.attr("href")}`,
+    allRoomsLink: jabamaDomain,
+  });
 };
 
 setInterval(() => {
-    roomFinder();
+  roomFinder();
 }, 60 * 1000 * 2);
