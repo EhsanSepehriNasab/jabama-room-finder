@@ -16,7 +16,7 @@ const roomFinder = async () => {
 
   if (!firstRoomCard) {
     // tslint:disable-next-line: no-console
-    console.log("not found");
+    return console.log("not found");
   }
 
   const allRoomsCount = $("div.plp-items").children().nextAll('.product-card').length + 1
